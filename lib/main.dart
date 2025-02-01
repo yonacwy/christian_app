@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:circular_menu/circular_menu.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
-import 'package:christian_app/home_page.dart';
-import 'package:christian_app/settings_page.dart';
-import 'package:christian_app/profile_page.dart';
-import 'package:christian_app/gospel_page.dart';
-import 'package:christian_app/bible_page.dart';
-import 'package:christian_app/journal_page.dart';
-import 'package:christian_app/missions_page.dart';
+import 'package:christian_app/home/home_page.dart';
+import 'package:christian_app/settings/settings_page.dart';
+import 'package:christian_app/profile/profile_page.dart';
+import 'package:christian_app/gospel/gospel_page.dart';
+import 'package:christian_app/bible/bible_page.dart';
+import 'package:christian_app/journal/journal_page.dart';
+import 'package:christian_app/missions/missions_page.dart';
 
 
 
@@ -104,61 +104,61 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const HomePage()),
-                );
-              },
-            ),
-            CircularMenuItem(
-              icon: Icons.settings,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SettingsPage()),
-                );
-              },
-            ),
-            CircularMenuItem(
-              icon: Icons.person,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),
-                );
-              },
-            ),
-            CircularMenuItem(
-              icon: Icons.book,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const GospelPage()),
-                );
-              },
-            ),
-            CircularMenuItem(
-              icon: Icons.menu_book,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const BiblePage()),
-                );
-              },
-            ),
-            CircularMenuItem(
-              icon: Icons.edit_note,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const JournalPage()),
-                );
-              },
-            ),
-            CircularMenuItem(
-              icon: Icons.public,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MissionsPage()),
-                );
+                                  );
+                                },
+                              ),
+                              CircularMenuItem(
+                                icon: Icons.settings,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const SettingsPage()),
+                                  );
+                                },
+                              ),
+                              CircularMenuItem(
+                                icon: Icons.person,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const ProfilePage()),
+                                  );
+                                },
+                              ),
+                              CircularMenuItem(
+                                icon: Icons.book,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const GospelPage()),
+                                  );
+                                },
+                              ),
+                              CircularMenuItem(
+                                icon: Icons.menu_book,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const BiblePage()),
+                                  );
+                                },
+                              ),
+                              CircularMenuItem(
+                                icon: Icons.edit_note,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const JournalPage()),
+                                  );
+                                },
+                              ),
+                              CircularMenuItem(
+                                icon: Icons.public,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const MissionsPage()),
+                                  );
               },
             ),
           ],
