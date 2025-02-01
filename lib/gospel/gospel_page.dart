@@ -62,6 +62,7 @@ class GospelPageState extends State<GospelPage> with TickerProviderStateMixin {
         onTabItemSelected: (int value) {
           setState(() {
             _motionTabBarController.index = value;
+            _tabController.index = value;
           });
         },
       ),
