@@ -1,3 +1,4 @@
+import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_menu/circular_menu.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
@@ -9,11 +10,14 @@ import 'package:christian_app/gospel/gospel_page.dart';
 import 'package:christian_app/bible/bible_page.dart';
 import 'package:christian_app/journal/journal_page.dart';
 import 'package:christian_app/missions/missions_page.dart';
+import 'package:christian_app/widgets/user_status.dart';
 
 
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('user');
   runApp(
     MaterialApp(
       home: FlutterSplashScreen(
@@ -94,6 +98,9 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        actions: [
+          UserStatus(),
+        ],
       ),
       body: Center(
         child: CircularMenu(
