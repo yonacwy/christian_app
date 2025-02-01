@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 import 'package:motion_tab_bar_v2/motion-tab-controller.dart';
-import 'entries_page.dart';
-import 'logs_page.dart';
+import 'create_page.dart';
+import 'events_page.dart';
 import 'calendar_page.dart';
 
 class JournalPage extends StatefulWidget {
@@ -47,15 +47,15 @@ class JournalPageState extends State<JournalPage> with TickerProviderStateMixin 
       body: TabBarView(
         controller: _tabController,
         children:  <Widget>[
-          EntriesPage(),
-          LogsPage(),
+          CreatePage(),
+          EventsPage(),
           CalendarPage(),
         ],
       ),
       bottomNavigationBar: MotionTabBar(
         controller: _motionTabBarController,
-        initialSelectedTab: "Entries",
-        labels:  ["Entries", "Logs", "Calendar"],
+        initialSelectedTab: "Create",
+        labels:  ["Create", "Events", "Calendar"],
         icons:  [Icons.list, Icons.assignment, Icons.calendar_today],
         tabIconColor: Colors.grey,
         tabSelectedColor: Colors.blue,
