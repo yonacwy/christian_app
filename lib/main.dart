@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:circular_menu/circular_menu.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:christian_app/home/home_page.dart';
+import 'package:christian_app/home/login_page.dart';
 import 'package:christian_app/settings/settings_page.dart';
 import 'package:christian_app/profile/profile_page.dart';
 import 'package:christian_app/gospel/gospel_page.dart';
@@ -18,7 +19,7 @@ void main() {
       home: FlutterSplashScreen(
         backgroundColor: Colors.white,
         duration: const Duration(milliseconds: 1500),
-        nextScreen: const MyApp(),
+        nextScreen: const LoginPage(),
       ),
     ),
   );
