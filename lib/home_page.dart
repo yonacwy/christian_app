@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:isar/isar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,17 +8,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Isar isar;
-
   @override
   void initState() {
     super.initState();
-    isar = Isar.openSync([/* schema here */], directory: '');
   }
-
   @override
   void dispose() {
-    isar.close();
     super.dispose();
   }
 
