@@ -111,6 +111,7 @@ class AccountPageState extends State<AccountPage> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Fix account_page to display user info
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account Settings'),

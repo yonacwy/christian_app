@@ -3,6 +3,7 @@ import 'package:christian_app/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_menu/circular_menu.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
+import 'package:lottie/lottie.dart';
 import 'package:christian_app/home/home_page.dart';
 import 'package:christian_app/home/login_page.dart';
 import 'package:christian_app/settings/settings_page.dart';
@@ -25,6 +26,9 @@ void main() async {
         backgroundColor: Colors.white,
         duration: const Duration(milliseconds: 1500),
         nextScreen: const LoginPage(),
+        splashScreenBody: Center(
+          child: Lottie.asset('assets/lottie/splash_animation.json'),
+        ),
       ),
     ),
   );

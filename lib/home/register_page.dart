@@ -1,36 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:christian_app/main.dart';
-import 'register_page.dart';
+import '../user_model.dart';
+import 'package:crypt/crypt.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  LoginPageState createState() => LoginPageState();
+  RegisterPageState createState() => RegisterPageState();
 }
 
-class LoginPageState extends State<LoginPage> {
+class RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final _nameController = TextEditingController();
   bool _passwordVisible = false;
-  bool _rememberMe = true;
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
-  Future<void> _login() async {
-    // TODO: Implement hive logic for login
+  Future<void> _register() async {
+    // TODO: Implement hive logic for register
     if (_formKey.currentState!.validate()) {
-      debugPrint('Login');
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Christian App')),
-      );
+      if (_passwordController.text != _confirmPasswordController.text) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Passwords do not match')),
+        );
+        return;
+      }
+      final email = _emailController.text;
+      final password = _passwordController.text;
+      final name = _nameController.text;
+      final hashedPassword = Crypt.sha256(password).toString();
+      final user = UserModel(name, email, password: hashedPassword);
+      final box = Hive.box<UserModel>('users');
+      await box.put(email, user);
+      debugPrint('Register');
+      if (!mounted) return;
+      Navigator.pop(context);
     }
   }
 
@@ -75,7 +91,7 @@ class LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Christian Login',
+                      'Christian Account',
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     const SizedBox(height: 32),
@@ -93,6 +109,26 @@ class LoginPageState extends State<LoginPage> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your email';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _nameController,
+                      key: const ValueKey('Name'),
+                      decoration: InputDecoration(
+                        labelText: 'Name',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your name';
                         }
                         return null;
                       },
@@ -127,9 +163,43 @@ class LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _confirmPasswordController,
+                      decoration: InputDecoration(
+                        labelText: 'Confirm Password',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                        ),
+                      ),
+                      obscureText: !_passwordVisible,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please confirm your password';
+                        }
+                        if (value != _passwordController.text) {
+                          return 'Passwords do not match';
+                        }
+                        return null;
+                      },
+                    ),
+
                     const SizedBox(height: 24),
                     ElevatedButton(
-                      onPressed: _login,
+                      onPressed: _register,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF009688),
                         foregroundColor: Colors.white,
@@ -138,41 +208,14 @@ class LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: const Text('login'),
+                      child: const Text('Register'),
                     ),
                     const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: _rememberMe,
-                              onChanged: (value) {
-                                setState(() {
-                                  _rememberMe = value!;
-                                });
-                              },
-                            ),
-                            const Text('Remember me'),
-                          ],
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // TODO: Implement reset password functionality
-                          },
-                          child: const Text('reset password'),
-                        ),
-                      ],
-                    ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const RegisterPage()),
-                        );
+                        Navigator.pop(context);
                       },
-                      child: const Text('Create account'),
+                      child: const Text('Return to Login'),
                     ),
                   ],
                 ),

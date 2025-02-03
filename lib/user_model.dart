@@ -10,5 +10,8 @@ class UserModel {
   @HiveField(1)
   String email;
 
-  UserModel(this.name, this.email);
+  @HiveField(2)
+  String? password;
+
+  UserModel(this.name, this.email, {this.password});
 }
